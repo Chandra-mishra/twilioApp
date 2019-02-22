@@ -36,6 +36,26 @@ voice.calls
     from: '+16038383157',
   })
   .then(call => process.stdout.write(call.sid));
+  
+  const api_key = '7ced6d8d6d9a284cf5a1eb277e827d88-9ce9335e-1651df4e';
+  const domain = 'sandbox0ad6c78c3cb84ea4b798ba9a08d87675.mailgun.org';
+  const mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+  const data = {
+  from: 'Excited User <postmaster@sandbox0ad6c78c3cb84ea4b798ba9a08d87675.mailgun.org>',
+  to: 'cpmchandra18@gmail.com',
+  subject: 'Hello',
+  text: 'Testing some Mailgun awesomeness!',
+ // html:output
+};
+ 
+mailgun.messages().send(data, (error, body) =>{
+  console.log(body);
+  if(!error)
+    console.log('message send!!');
+  else
+      console.log('please correct the error!!');
+  
+});
 });
 
 http.createServer(app).listen(1337, function () {
